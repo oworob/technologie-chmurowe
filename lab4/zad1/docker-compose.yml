@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+
+    nginx:
+      build:
+        context: ./
+      volumes:
+        - nginx_data:/usr/share/nginx/html
+      ports:
+        - 80:80
+
+
+volumes:
+  nginx_data:
+  

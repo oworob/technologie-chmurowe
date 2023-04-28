@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongo:4.1.13
+    container_name: db
+    networks:
+      - net_A
+    volumes:
+      - zad1_mongo_data:/data/db
+    ports:
+      - "27019:27017"
+
+  server:
+    image: oworobjew/stepik:latest
+    container_name: server
+    networks:
+      - net_A
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+
+networks:
+  net_A:
+
+volumes:
+  zad1_mongo_data:
+    external: true

@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+
+    node:
+      build:
+        context: ./node
+      volumes:
+        - nodejs_data:/app
+        - all_volumes:/all_volumes
+      command: sh -c "cp -a /app/* /all_volumes"
+
+    nginx:
+      build:
+        context: ./nginx
+      volumes:
+        - zad1_nginx_data:/usr/share/nginx/html
+        - all_volumes:/all_volumes
+      command: sh -c "cp -a /usr/share/nginx/html/* /all_volumes"
+
+
+volumes:
+  nodejs_data:
+  all_volumes:
+  zad1_nginx_data:
+    external: true

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+
+    zad4:
+        build:
+            context: ./
+        ports:
+            - "3000:3000"
+        volumes:
+            - zad4:/app
+
+volumes:
+  zad4:
