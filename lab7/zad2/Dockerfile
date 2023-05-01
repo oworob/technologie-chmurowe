@@ -4,4 +4,4 @@ WORKDIR /app
 COPY /src/package.json /src/package-lock.json src/app.js .
 RUN npm install --silent
 EXPOSE 3003
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build", "start"]

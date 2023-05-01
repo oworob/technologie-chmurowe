@@ -2,30 +2,38 @@ version: "3.8"
 
 services:
 
-  db:
-    image: mysql
-    container_name: db
+  database:
+    image: mongo:4.1.13
+    container_name: database
     networks:
-      - my_network
-    environment:
-      - MYSQL_DATABASE=db
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test
-      - MYSQL_ROOT_PASSWORD=root
+      - backend_network
     volumes:
-      - db_data:/var/lib/mysql
+      - lab6_mongo:/data/db
+    ports:
+      - "27017:27017"
+      
 
   backend:
-    build: .
+    build: server
     container_name: backend
     networks:
       - backend_network
-    environment:
-      DB_HOST: db
+      - frontend_network
     ports:
-      - "80:3000"
+      - "3001:3001"
     depends_on:
-      - db
+      - database
+
+  frontend:
+    build: client
+    container_name: frontend
+    networks:
+      - frontend_network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - backend
     
 
 networks:
@@ -34,4 +42,4 @@ networks:
     internal: true
 
 volumes:
-  db_data:
+  lab6_mongo:
