@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  api:
+    platform: linux/arm64
+    build: api
+    ports:
+      - 3000:3000
+
+  db:
+    image: amd64/mongo
