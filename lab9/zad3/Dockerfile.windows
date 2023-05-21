@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+WORKDIR /app
+
+COPY app.py .
+
+CMD ["python3", "app.py"]
